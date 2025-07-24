@@ -1,15 +1,13 @@
-import { useState } from 'react'
-import Users from './pages/Users'
-
-
+import { Outlet } from 'react-router-dom'
+import { StyleProvider } from '@ant-design/cssinjs';
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
-      <Users />
-      
+      <StyleProvider layer>
+        <Outlet />
+      </StyleProvider>
     </>
   )
 }
