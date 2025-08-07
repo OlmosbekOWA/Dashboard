@@ -1,1 +1,9 @@
 @import "tailwindcss";
+*{
+    
+    box-sizing: border-box;
+
+}
+body{
+    padding: 0px 10px;
+}

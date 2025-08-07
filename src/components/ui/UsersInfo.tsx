@@ -11,7 +11,7 @@ const UsersInfo = ({ showCard, setShowCard }: UserHover) => {
   return (
     <div className="flex gap-6 flex-col w-full max-w-[300px]">
       <div
-        className="bg-center max-w-[296px] h-[296px] rounded-full bg-cover"
+        className="bg-center max-w-[200px] h-[200px] rounded-full bg-cover xl:h-[296px] xl:max-w-[296px]"
         style={{ backgroundImage: `url(${usurImg})` }}
       ></div>
       <div className="flex flex-col gap-3">
