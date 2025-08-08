@@ -22,17 +22,17 @@ const getMonthPositions = (weeksCount: number) => {
 };
 
 const ContributionGraph = () => {
-  const [weeks, setWeeks] = useState(50);
+  const [weeks, setWeeks] = useState(45);
   const [monthPositions, setMonthPositions] = useState(getMonthPositions(50));
   const [scale, setScale] = useState("scale-100");
 
   useEffect(() => {
     const updateLayout = () => {
       if (window.innerWidth < 1200) {
-        setWeeks(50); 
-        setScale("scale-100"); z
+        setWeeks(45); 
+        setScale("scale-100"); 
       } else {
-        setWeeks(50);
+        setWeeks(45);
         setScale("scale-100");
       }
       setMonthPositions(getMonthPositions(weeks));
@@ -64,7 +64,7 @@ const ContributionGraph = () => {
           </div>
 
           
-          <div className="overflow-x-auto max-w-[430px] lg:max-w-[600px] xl:max-w-[750px] mb-1">
+          <div className="overflow-x-auto max-w-[430px] lg:max-w-[600px] xl:max-w-[740px] mb-1">
             <div className="flex gap-[3px] pl-5 w-max">
               {data.map((week, weekIndex) => (
                 <div key={weekIndex} className="flex flex-col gap-[3px]">

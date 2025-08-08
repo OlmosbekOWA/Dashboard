@@ -1,6 +1,7 @@
 import GitHubProjects from "../components/shared/GitHubProjects";
 import ContributionGraph from "../components/shared/ContributionGraph";
 import ActivityOverview from "../components/ui/activity-overview";
+import ContributionActivity from "../components/shared/contribution-activity";
 const Trends = () => {
   return (
     <div className="w-full flex flex-col gap-6">
@@ -26,6 +27,8 @@ const Trends = () => {
         </div>
 
         <ActivityOverview />
+        <ContributionActivity />
+        
       </div>
     </div>
   );
