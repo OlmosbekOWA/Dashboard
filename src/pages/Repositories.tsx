@@ -1,6 +1,9 @@
+import Component from "../components/shared/repository-list"
 const Repositories = () =>{
     return(
-        <h1> Repositories page</h1>
+        <div>
+            <Component />
+        </div>
     )
 }
 
