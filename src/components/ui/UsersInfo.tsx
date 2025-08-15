@@ -9,12 +9,12 @@ import type { UserHover } from "../../types/UserType";
 
 const UsersInfo = ({ showCard, setShowCard }: UserHover) => {
   return (
-    <div className="flex gap-6 flex-col w-full max-w-[300px]">
+    <div className="flex gap-6 flex-col w-full max-w-[700px] md:max-w-[300px]">
       <div
         className="bg-center max-w-[200px] h-[200px] rounded-full bg-cover xl:h-[296px] xl:max-w-[296px]"
         style={{ backgroundImage: `url(${usurImg})` }}
       ></div>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col items-center gap-3 md:items-start">
         <h1 className="text-xl text-[#00000062]">OlmosbekOWA</h1>
         <button className="w-full bg-[#0000000e] p-1 rounded-[5px] text-[14px] font-[500] border-[1px] border-[#00000041] cursor-pointer hover:bg-[#00000021]">
           Follow
