@@ -39,14 +39,14 @@ export default function ContributionActivity() {
                   <a href="#" className="text-blue-600 hover:underline dark:text-blue-400">
                     logist-project/logist-x-project 
                   </a>
-                  <span className="text-gray-500 dark:text-gray-400">25 commits</span>
+                  <span className="text-gray-500 dark:text-gray-400">22 commits</span>
                   <div className="h-2 bg-green-500 rounded-full ml-2" style={{ width: `${(2 / totalCommits) * 100}%`, maxWidth: '80px' }} />
                 </div>
                 <div className="flex items-center justify-between text-sm">
                   <a href="#" className="text-blue-600 hover:underline dark:text-blue-400">
                     alienorar/Billing-service-main,
                   </a>
-                  <span className="text-gray-500 dark:text-gray-400">18 commits</span>
+                  <span className="text-gray-500 dark:text-gray-400">27 commits</span>
                   <div className="h-2 bg-green-500 rounded-full ml-2" style={{ width: `${(1 / totalCommits) * 100}%`, maxWidth: '80px' }} />
                 </div>
               </div>

@@ -1,6 +1,8 @@
-import { useMemo, useState } from "react";
-import { Input, Dropdown, Menu, Button, Radio, Checkbox } from "antd";
-import { ChevronDown } from "lucide-react";
+"use client"
+
+import { useMemo, useState } from "react"
+import { Input, Dropdown, Menu, Button, Radio } from "antd"
+import { ChevronDown } from "lucide-react"
 
 const repositories = [
   {
@@ -10,6 +12,7 @@ const repositories = [
     forkedFrom: null,
     stars: 150,
     languageColor: "bg-blue-500",
+    repos: "Public",
   },
   {
     name: "Weather",
@@ -18,6 +21,16 @@ const repositories = [
     forkedFrom: null,
     stars: 88,
     languageColor: "bg-blue-500",
+    repos: "Public",
+  },
+  {
+    name: "Billing-kantrakt-page",
+    language: "TypeScript",
+    updated: "2025-07-05T14:00:00Z",
+    forkedFrom: null,
+    stars: 100,
+    languageColor: "bg-blue-500",
+    repos: "Private",
   },
   {
     name: "my-progect",
@@ -26,6 +39,7 @@ const repositories = [
     forkedFrom: null,
     stars: 60,
     languageColor: "bg-blue-500",
+    repos: "Public",
   },
   {
     name: "OTU-transfer",
@@ -34,6 +48,7 @@ const repositories = [
     forkedFrom: "alienorar/OTU-transfer",
     stars: 48,
     languageColor: "bg-blue-500",
+    repos: "Private",
   },
   {
     name: "todo-list-react",
@@ -42,6 +57,7 @@ const repositories = [
     forkedFrom: null,
     stars: 77,
     languageColor: "bg-yellow-500",
+    repos: "Public",
   },
   {
     name: "js-project",
@@ -50,6 +66,7 @@ const repositories = [
     forkedFrom: null,
     stars: 67,
     languageColor: "bg-red-500",
+    repos: "Public",
   },
   {
     name: "Countres",
@@ -58,6 +75,7 @@ const repositories = [
     forkedFrom: null,
     stars: 64,
     languageColor: "bg-yellow-500",
+    repos: "Public",
   },
   {
     name: "next-dashboard",
@@ -66,6 +84,16 @@ const repositories = [
     forkedFrom: null,
     stars: 92,
     languageColor: "bg-blue-500",
+    repos: "Public",
+  },
+  {
+    name: "entertainment-web-app-full-web-site-OlmosbekOWA",
+    language: "TypeScript",
+    updated: "2025-05-15T13:00:00Z",
+    forkedFrom: "owauz/entertainment-web-app-full-web-site-OlmosbekOWA",
+    stars: 35,
+    languageColor: "bg-blue-500",
+    repos: "Private",
   },
   {
     name: "TodoList",
@@ -74,6 +102,7 @@ const repositories = [
     forkedFrom: null,
     stars: 41,
     languageColor: "bg-blue-500",
+    repos: "Public",
   },
   {
     name: "reduxTodoList",
@@ -82,6 +111,7 @@ const repositories = [
     forkedFrom: null,
     stars: 30,
     languageColor: "bg-blue-500",
+    repos: "Public",
   },
   {
     name: "Task",
@@ -90,106 +120,69 @@ const repositories = [
     forkedFrom: null,
     stars: 55,
     languageColor: "bg-yellow-500",
+    repos: "Public",
   },
-];
-
+]
 
 export default function Component() {
-  const [search, setSearch] = useState("");
-  const [selectedTypes, setSelectedTypes] = useState(["All"]);
-  const [selectedLanguages, setSelectedLanguages] = useState(["All"]);
-  const [selectedSort, setSelectedSort] = useState("last-updated");
+  const [search, setSearch] = useState("")
+  const [selectedType, setSelectedType] = useState("All")
+  const [selectedLanguage, setSelectedLanguage] = useState("All")
+  const [selectedSort, setSelectedSort] = useState("last-updated")
 
-  const createCheckboxMenu = (items:any, selectedItems:any, setSelectedItems:any) => (
+  const createRadioMenu = (items: string[], selected: string, setSelected: any) => (
     <Menu>
-      {items.map((item:any) => (
+      {items.map((item) => (
         <Menu.Item key={item}>
-          <Checkbox
-            checked={selectedItems.includes(item)}
-            onChange={(e) => {
-              if (e.target.checked) {
-                setSelectedItems([...selectedItems, item]);
-              } else {
-                setSelectedItems(selectedItems.filter((i) => i !== item));
-              }
-            }}
-          >
+          <Radio checked={selected === item} onChange={() => setSelected(item)}>
             {item}
-          </Checkbox>
+          </Radio>
         </Menu.Item>
       ))}
     </Menu>
-  );
+  )
 
-  const sortMenu = (
-    <Menu>
-      <Menu.Item key="last-updated">
-        <Radio
-          checked={selectedSort === "last-updated"}
-          onChange={() => setSelectedSort("last-updated")}
-        >
-          Last updated
-        </Radio>
-      </Menu.Item>
-      <Menu.Item key="name">
-        <Radio
-          checked={selectedSort === "name"}
-          onChange={() => setSelectedSort("name")}
-        >
-          Name
-        </Radio>
-      </Menu.Item>
-      <Menu.Item key="stars">
-        <Radio
-          checked={selectedSort === "stars"}
-          onChange={() => setSelectedSort("stars")}
-        >
-          Stars
-        </Radio>
-      </Menu.Item>
-    </Menu>
-  );
+  const handleRepoClick = (repoName: string) => {
+    const githubUrl = `https://github.com/OlmosbekOWA/${repoName}`
+    window.open(githubUrl, "_blank")
+  }
+
+  const handleForkedRepoClick = (forkedFrom: string) => {
+    const githubUrl = `https://github.com/${forkedFrom}`
+    window.open(githubUrl, "_blank")
+  }
 
   const filteredRepositories = useMemo(() => {
-    let filtered = [...repositories];
+    let filtered = [...repositories]
 
     if (search) {
-      filtered = filtered.filter((repo) =>
-        repo.name.toLowerCase().includes(search.toLowerCase())
-      );
+      filtered = filtered.filter((repo) => repo.name.toLowerCase().includes(search.toLowerCase()))
     }
 
-    if (!selectedTypes.includes("All")) {
+    if (selectedType !== "All") {
       filtered = filtered.filter((repo) => {
-        return selectedTypes.some((type) => {
-          if (type === "Forks") return repo.forkedFrom;
-          if (type === "Sources") return !repo.forkedFrom;
-          return false;
-        });
-      });
+        if (selectedType === "Forks") return repo.forkedFrom
+        if (selectedType === "Sources") return !repo.forkedFrom
+        return false
+      })
     }
 
-    if (!selectedLanguages.includes("All")) {
-      filtered = filtered.filter((repo) =>
-        selectedLanguages.includes(repo.language)
-      );
+    if (selectedLanguage !== "All") {
+      filtered = filtered.filter((repo) => repo.language === selectedLanguage)
     }
 
-    filtered.sort((a, b) => {
-      if (selectedSort === "last-updated") {
-        return new Date(b.updated).getTime() - new Date(a.updated).getTime();
-      }
-      if (selectedSort === "name") {
-        return a.name.localeCompare(b.name);
-      }
-      if (selectedSort === "stars") {
-        return b.stars - a.stars;
-      }
-      return 0;
-    });
+    if (selectedSort === "last-updated") {
+      filtered.sort((a, b) => new Date(b.updated).getTime() - new Date(a.updated).getTime())
+    }
+    if (selectedSort === "name") {
+      filtered.sort((a, b) => a.name.localeCompare(b.name))
+    }
+    if (selectedSort === "stars") {
+      filtered.sort((a, b) => b.stars - a.stars)
+    }
 
-    return filtered;
-  }, [search, selectedTypes, selectedLanguages, selectedSort]);
+    return filtered
+  }, [search, selectedType, selectedLanguage, selectedSort])
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -202,11 +195,7 @@ export default function Component() {
         />
         <div className="flex gap-2">
           <Dropdown
-            overlay={createCheckboxMenu(
-              ["All", "Sources", "Forks"],
-              selectedTypes,
-              setSelectedTypes
-            )}
+            overlay={createRadioMenu(["All", "Sources", "Forks"], selectedType, setSelectedType)}
             trigger={["click"]}
           >
             <Button className="flex items-center gap-1">
@@ -214,10 +203,10 @@ export default function Component() {
             </Button>
           </Dropdown>
           <Dropdown
-            overlay={createCheckboxMenu(
+            overlay={createRadioMenu(
               ["All", "TypeScript", "JavaScript", "HTML"],
-              selectedLanguages,
-              setSelectedLanguages
+              selectedLanguage,
+              setSelectedLanguage,
             )}
             trigger={["click"]}
           >
@@ -225,7 +214,10 @@ export default function Component() {
               Language <ChevronDown className="h-4 w-4" />
             </Button>
           </Dropdown>
-          <Dropdown overlay={sortMenu} trigger={["click"]}>
+          <Dropdown
+            overlay={createRadioMenu(["last-updated", "name", "stars"], selectedSort, setSelectedSort)}
+            trigger={["click"]}
+          >
             <Button className="flex items-center gap-1">
               Sort <ChevronDown className="h-4 w-4" />
             </Button>
@@ -233,25 +225,31 @@ export default function Component() {
         </div>
       </div>
 
-      <div className="">
+      <div>
         {filteredRepositories.map((repo, index) => (
           <div
             key={index}
-            className="flex items-center justify-between p-4 hover:bg-gray-50 dark:hover:bg-gray-800 border-b"
+            className="flex items-center justify-between px-4 py-6 hover:bg-gray-50 dark:hover:bg-gray-800 border-b border-[#00000042]"
           >
             <div className="flex flex-col gap-1">
               <div className="flex items-center gap-2">
-                <h3 className="font-semibold text-blue-600 hover:underline cursor-pointer">
+                <h3
+                  className="font-semibold text-blue-600 hover:underline cursor-pointer"
+                  onClick={() => handleRepoClick(repo.name)}
+                >
                   {repo.name}
                 </h3>
                 <span className="text-xs px-2 py-0.5 border rounded-full text-gray-600 dark:text-gray-400">
-                  Public
+                  {repo.repos}
                 </span>
               </div>
               {repo.forkedFrom && (
                 <p className="text-sm text-gray-500 dark:text-gray-400">
                   Forked from{" "}
-                  <span className="text-blue-600 hover:underline cursor-pointer">
+                  <span
+                    className="text-blue-600 hover:underline cursor-pointer"
+                    onClick={() => handleForkedRepoClick(repo.forkedFrom!)}
+                  >
                     {repo.forkedFrom}
                   </span>
                 </p>
@@ -272,5 +270,5 @@ export default function Component() {
         ))}
       </div>
     </div>
-  );
+  )
 }
