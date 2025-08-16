@@ -23,17 +23,20 @@ const getMonthPositions = (weeksCount: number) => {
 
 const ContributionGraph = () => {
   const [weeks, setWeeks] = useState(45);
-  const [monthPositions, setMonthPositions] = useState(getMonthPositions(50));
+  const [monthPositions, setMonthPositions] = useState(getMonthPositions(45));
   const [scale, setScale] = useState("scale-100");
 
   useEffect(() => {
     const updateLayout = () => {
-      if (window.innerWidth < 1200) {
-        setWeeks(45); 
-        setScale("scale-100"); 
-      } else {
+      if (window.innerWidth < 640) {
+        setWeeks(35);          // kichik ekranlar uchun ustunlar soni kamayadi
+        setScale("scale-75");  // 25% kichrayadi
+      } else if (window.innerWidth < 1200) {
         setWeeks(45);
-        setScale("scale-100");
+        setScale("scale-90");  // o‘rtacha ekran uchun ozgina kichrayadi
+      } else {
+        setWeeks(50);
+        setScale("scale-100"); // katta ekran uchun normal
       }
       setMonthPositions(getMonthPositions(weeks));
     };
@@ -48,11 +51,12 @@ const ContributionGraph = () => {
   );
 
   return (
-    <div className="p-4 ">
+    <div className="p-4">
       <div className="overflow-x-auto">
-        <div className={`origin-top-left ${scale} overflow-x-auto` }>
+        <div className={`origin-top-left ${scale}`}>
           
-          <div className="flex justify-between overflow-x-auto max-w-[430px] lg:max-w-[600px] xl:max-w-[750px]">
+          {/* Oylik belgilar */}
+          <div className="flex justify-between max-w-[320px] sm:max-w-[430px] lg:max-w-[600px] xl:max-w-[750px]">
             {Array.from({ length: weeks }).map((_, i) => {
               const month = monthPositions.find((m) => m.index === i);
               return (
@@ -63,8 +67,8 @@ const ContributionGraph = () => {
             })}
           </div>
 
-          
-          <div className="overflow-x-auto max-w-[430px] lg:max-w-[600px] xl:max-w-[740px] mb-1">
+          {/* Asosiy Contribution kataklar */}
+          <div className="max-w-[320px] sm:max-w-[430px] lg:max-w-[600px] xl:max-w-[740px] mb-1 overflow-x-auto">
             <div className="flex gap-[3px] pl-5 w-max">
               {data.map((week, weekIndex) => (
                 <div key={weekIndex} className="flex flex-col gap-[3px]">
@@ -82,6 +86,7 @@ const ContributionGraph = () => {
         </div>
       </div>
 
+      {/* Pastdagi legend */}
       <div className="w-full flex justify-between items-center mt-2 flex-wrap gap-2 text-xs">
         <span className="text-gray-600">Learn how we count contributions</span>
         <div className="flex items-center gap-2">

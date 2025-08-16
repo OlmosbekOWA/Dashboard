@@ -6,7 +6,7 @@ import { ChevronDown } from "lucide-react"
 
 const repositories = [
   {
-    name: "Dashboard",
+    name: "Partfolia",
     language: "TypeScript",
     updated: "2025-08-08T09:00:00Z",
     forkedFrom: null,

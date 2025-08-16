@@ -18,10 +18,10 @@ const Trends = () => {
           </button>
         </div>
         <div className="flex">
-            <div className="flex text-[10px] flex-col  gap-4 py-9 pl-4">
-            <span>Mon</span>
-            <span>Wed</span>
-            <span>Fri</span>
+            <div className="flex text-[10px] flex-col  gap-4 py-9 pl-0 ms:pl-4">
+              <span>Mon</span>
+              <span>Wed</span>
+              <span>Fri</span>
             </div>
             <ContributionGraph />   
         </div>
