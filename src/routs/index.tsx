@@ -3,7 +3,7 @@ import { IoBookOutline } from "react-icons/io5";
 import { RiGitRepositoryLine } from "react-icons/ri";
 import { GoProjectSymlink } from "react-icons/go";
 import { RiUserShared2Fill } from "react-icons/ri";
-import { AiOutlineStar } from "react-icons/ai";
+
 
 export const routes = [
   {
