@@ -7,10 +7,17 @@ import Link from "antd/es/typography/Link";
 import orgLogo from "../../../public/photo_2025-07-23_17-38-41.jpg";
 import type { UserHover } from "../../types/UserType";
 
+
+
 const UsersInfo = ({ showCard, setShowCard }: UserHover) => {
+
+  function hendleOpenGit(){
+    window.open("https://github.com/OlmosbekOWA")
+  }
+
   return (
     <div className="flex flex-col w-full max-w-[700px] md:max-w-[300px]">
-      {/* Avatar + Name */}
+      
       <div className="flex items-center gap-3 md:flex-col md:items-center">
         <div
           className="bg-center w-[120px] h-[120px] md:w-[200px] md:h-[200px] rounded-full bg-cover"
@@ -21,8 +28,8 @@ const UsersInfo = ({ showCard, setShowCard }: UserHover) => {
         </h1>
       </div>
 
-      {/* Follow button */}
-      <button className="w-full bg-[#0000000e] p-1 mt-3 rounded-[5px] text-[14px] font-[500] border-[1px] border-[#00000041] cursor-pointer hover:bg-[#00000021]">
+      
+      <button onClick={()=>hendleOpenGit()}  className="w-full bg-[#0000000e] p-1 mt-3 rounded-[5px] text-[14px] font-[500] border-[1px] border-[#00000041] cursor-pointer hover:bg-[#00000021]">
         Follow
       </button>
 
